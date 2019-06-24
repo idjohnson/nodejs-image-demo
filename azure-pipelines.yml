@@ -14,6 +14,7 @@ steps:
   displayName: 'Docker Build'
 
 - script: |
+    echo $docker-pass | docker login -u idjohnson --password-stdin
     echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
+    echo See https://aka.ms/yamldocker-pass
   displayName: 'Run a multi-line script'
