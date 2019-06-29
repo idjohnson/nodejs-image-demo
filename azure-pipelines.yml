@@ -14,9 +14,18 @@ steps:
   displayName: 'Docker Build'
 
 - script: |
-    echo $(docker-pass) | docker login -u idjohnson --password-stdin
+    echo $(docker-pass) | docker login -u $(docker-username) --password-stdin
     echo now tag
-    docker tag idjohnson/node-demo $REPO:$TAG
-    docker tag idjohnson/node-demo $REPO:travis-$TRAVIS_BUILD_NUMBER
-    docker push $REPO
+    docker tag idjohnson/node-demo idjohnson/idjdemo:$(Build.BuildId)
+    docker tag idjohnson/node-demo idjohnson/idjdemo:$(Build.SourceVersion)
+    docker push idjohnson/idjdemo
   displayName: 'Run a multi-line script'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'myDockerConnection'
+    repository: 'idjohnson/idjdemo'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: 't-$(Build.BuildId)
+      t-$(Build.SourceVersion)'
