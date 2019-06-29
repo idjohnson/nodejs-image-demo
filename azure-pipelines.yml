@@ -27,5 +27,4 @@ steps:
     repository: 'idjohnson/idjdemo'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
-    tags: 't-$(Build.BuildId)
-      t-$(Build.SourceVersion)'
+    tags: '$(Build.BuildId)-$(Build.SourceVersion)'
