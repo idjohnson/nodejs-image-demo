@@ -18,6 +18,7 @@ steps:
     echo now tag
     docker tag idjohnson/node-demo idjohnson/idjdemo:$(Build.BuildId)
     docker tag idjohnson/node-demo idjohnson/idjdemo:$(Build.SourceVersion)
+    docker tag idjohnson/node-demo idjohnson/idjdemo:latest
     docker push idjohnson/idjdemo
   displayName: 'Run a multi-line script'
 
